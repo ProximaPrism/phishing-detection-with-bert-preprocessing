@@ -1,6 +1,6 @@
 # Phishing Detection Model with BERT Tokenizer
 
-This is a phishing detection deep learning (DL) model trained with raw emails that are tokenized using the BERT tokenizer.
+This is a phishing detection deep learning (DL) model trained with raw emails that are tokenized using a BERT tokenizer.
 
 ## References
 
