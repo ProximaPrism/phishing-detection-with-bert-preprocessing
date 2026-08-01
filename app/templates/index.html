@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connect Mailbox</title>
+    <link rel="stylesheet" href="/static/css/login.css">
+</head>
+
+<body>
+
+<div class="card">
+
+    <h1>Phishing Email Detector</h1>
+    <p class="subtitle">
+        Connect your mailbox to begin analyzing emails.
+    </p>
+
+    <form id="connectForm">
+
+        <label for="host">IMAP Host</label>
+        <input
+                id="host"
+                type="text"
+                value="imap.gmail.com"
+                required
+        >
+
+        <label for="username">Email Address</label>
+        <input
+                id="username"
+                type="email"
+                placeholder="example@gmail.com"
+                required
+        >
+
+        <label for="password">App Password</label>
+        <input
+                id="password"
+                type="password"
+                required
+        >
+
+        <label for="mailbox">Mailbox</label>
+        <input
+                id="mailbox"
+                type="text"
+                value="INBOX"
+        >
+
+        <button id="connectButton" type="submit">
+            Connect
+        </button>
+
+        <div id="status" class="status"></div>
+
+    </form>
+
+</div>
+
+<script src="/static/js/login.js"></script>
+
+</body>
+</html>

@@ -1,10 +1,18 @@
 import keras
 import keras_hub
+import tensorflow as tf
 
 # re-create the BERT preprocessor and backbones since we don't save these as part of the model
 preprocessor = keras_hub.models.BertTextClassifierPreprocessor.from_preset(
     "bert_base_en_uncased",
     sequence_length=512,
+)
+
+# build preprocessor before FastAPI receives requests
+preprocessor(
+    tf.constant(
+        ["lorem ipsum"]
+    )
 )
 
 backbone = keras_hub.models.BertBackbone.from_preset(

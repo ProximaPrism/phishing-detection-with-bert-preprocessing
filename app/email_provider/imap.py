@@ -1,5 +1,4 @@
 import email
-import imaplib
 from email.header import decode_header
 from email.utils import parseaddr
 from typing import Optional
@@ -69,30 +68,71 @@ def extract_body(msg) -> str:
     return body
 
 
-def get_emails(host: str, username: str, password: str, limit: int = 25) -> list[EmailResponse]:
-    connection = imaplib.IMAP4_SSL(host)
-    connection.login(username, password)
+def get_emails(connection, offset: int = 0, limit: int = 10) -> list[EmailResponse]:
     connection.select("INBOX")
 
-    _, data = connection.search(None, "ALL")
-    email_ids = data[0].split()
+    status, data = connection.search(
+        None,
+        "ALL"
+    )
+
+    if status != "OK":
+        return []
+
     emails = []
+    email_ids = data[0].split()
 
-    for email_id in reversed(email_ids[-limit:]):
-        _, message = connection.fetch(email_id, "(RFC822)")
-        msg = email.message_from_bytes(message[0][1])
+    # newest emails first
+    email_ids.reverse()
 
-        display_name, sender = parseaddr(msg.get("From", ""))
-        emails.append(
+    # lazy loading slice
+    id_slice = email_ids[offset:offset + limit]
+
+    id_set = ",".join(
+        email_id.decode()
+        for email_id in id_slice
+    )
+
+    _, messages = connection.fetch(
+        id_set,
+        "(RFC822)"
+    )
+
+    # ensures correct order of emails
+    email_map = {}
+
+    for response in messages:
+        # ignore IMAP metadata responses
+        if not isinstance(response, tuple):
+            continue
+
+        msg = email.message_from_bytes(
+            response[1]
+        )
+        display_name, sender = parseaddr(
+            msg.get("From", "")
+        )
+
+        email_map[response[0].split()[0].decode()] = (
             EmailResponse(
-                id=email_id.decode(),
-                subject=decode_text(msg.get("Subject", "")),
-                body=extract_body(msg=msg),
+                id=response[0].split()[0].decode(),
+                subject=decode_text(
+                    msg.get("Subject", "")
+                ),
+                body=extract_body(msg),
                 sender_email=sender,
                 sender_display_name=display_name,
-                sent_datetime=msg.get("Date", ""),
+                sent_datetime=msg.get(
+                    "Date",
+                    ""
+                ),
             )
         )
 
-    connection.logout()
+    # restore original inbox order
+    emails = [
+        email_map[email_id.decode()]
+        for email_id in id_slice
+        if email_id.decode() in email_map
+    ]
     return emails

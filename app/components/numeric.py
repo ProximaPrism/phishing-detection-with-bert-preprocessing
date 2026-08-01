@@ -4,7 +4,7 @@ from email.utils import parseaddr
 from datetime import datetime
 
 
-def extract_numeric_features(request) -> list:
+def extract_numeric_features(request) -> dict:
     def parse_sender_receiver(raw: str) -> tuple[str, str]:
         n, e = parseaddr(raw)
         n = n.strip().replace('\\"', '"').strip('"').strip()
@@ -49,17 +49,17 @@ def extract_numeric_features(request) -> list:
 
     does_body_contains_urls = bool(re.search(r"https://\S+", request.body)) * 1
 
-    return [
-        is_date_invalid,
-        is_sender_displayname_missing,
-        is_sender_email_missing,
-        sender_email_digit_count,
-        sender_email_has_hyphens,
-        sender_username_length,
-        sender_domain_length,
-        hour_sin,
-        hour_cos,
-        day_of_week_sin,
-        day_of_week_cos,
-        does_body_contains_urls
-    ]
+    return {
+        "is_date_invalid": is_date_invalid,
+        "is_sender_displayname_missing": is_sender_displayname_missing,
+        "is_sender_email_missing": is_sender_email_missing,
+        "sender_email_digit_count": sender_email_digit_count,
+        "sender_email_has_hyphens": sender_email_has_hyphens,
+        "sender_username_length": sender_username_length,
+        "sender_domain_length": sender_domain_length,
+        "hour_sin": hour_sin,
+        "hour_cos": hour_cos,
+        "day_of_week_sin": day_of_week_sin,
+        "day_of_week_cos": day_of_week_cos,
+        "does_body_contains_urls": does_body_contains_urls
+    }
