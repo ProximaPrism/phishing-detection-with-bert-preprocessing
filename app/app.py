@@ -3,11 +3,14 @@ from typing import Optional
 import joblib
 import keras
 import numpy as np
+import pandas as pd
 import tensorflow as tf
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
+
+from email_provider.imap import get_emails
 
 app = FastAPI(title="Phishing Email Model")
 
@@ -29,6 +32,16 @@ feature_order = joblib.load("./models/feature_order.pkl")
 # load the model
 classifier = keras.models.load_model("./models/classifier.keras")
 
+# endpoint to get the emails
+@app.get("/emails")
+def emails():
+    return get_emails(
+        host="imap.gmail.com",
+        username="", # supply these yourself
+        password="" # supply these yourself
+    )
+
+
 # define a request format that the user will pass
 class EmailRequest(BaseModel):
     subject: str
@@ -37,7 +50,7 @@ class EmailRequest(BaseModel):
     sender_display_name: Optional[str] = None
     sent_datetime: str
 
-
+# endpoint for the prediction model
 @app.post("/predict")
 def predict(request: EmailRequest):
     from components.bert import preprocessor, embedding_model
@@ -50,7 +63,12 @@ def predict(request: EmailRequest):
     tokens = preprocessor(tf.constant([text]))
     embedding = embedding_model(tokens, training=False).numpy()
 
-    numeric = np.array([extract_numeric_features(request)])
+    numeric_features = extract_numeric_features(request)
+    numeric = pd.DataFrame(
+        [numeric_features],
+        columns=scaler.feature_names_in_
+    )
+
     numeric = scaler.transform(numeric)
 
     features = np.concatenate(

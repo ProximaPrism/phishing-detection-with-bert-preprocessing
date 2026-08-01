@@ -1,216 +1,39 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Phishing Email Classifier</title>
-
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            max-width: 800px;
-            margin: 40px auto;
-            padding: 20px;
-            background: #f4f6f8;
-        }
-
-        h1 {
-            color: #333;
-        }
-
-        .card {
-            background: white;
-            padding: 25px;
-            border-radius: 10px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-        }
-
-        label {
-            display: block;
-            margin-top: 15px;
-            font-weight: bold;
-        }
-
-        input, textarea {
-            width: 100%;
-            padding: 10px;
-            margin-top: 5px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            box-sizing: border-box;
-        }
-
-        textarea {
-            height: 180px;
-            resize: vertical;
-        }
-
-        button {
-            margin-top: 20px;
-            padding: 12px 20px;
-            background: #2563eb;
-            color: white;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-
-        button:hover {
-            background: #1d4ed8;
-        }
-
-        #result {
-            margin-top: 20px;
-            padding: 15px;
-            border-radius: 6px;
-            display: none;
-        }
-
-        .phishing {
-            background: #fee2e2;
-            color: #991b1b;
-        }
-
-        .normal {
-            background: #dcfce7;
-            color: #166534;
-        }
-    </style>
+    <link href="style.css" rel="stylesheet"/>
 </head>
-
 <body>
+<div class="app">
+    <!-- create sidebar for the inbox of emails -->
+    <aside class="sidebar">
+        <h2>Inbox</h2>
 
-<div class="card">
+        <div id="emailList" class="email-list">
+            <script src="email_list.js"></script>
+        </div>
+    </aside>
 
-    <h1>Phishing Email Detector</h1>
+    <main class="viewer">
+        <div class="toolbar">
+            <h2 id="subject"></h2>
 
-    <label for="subject">
-        Subject
-    </label>
-    <input
-        id="subject"
-        type="text"
-        placeholder="Email subject"
-    >
+            <div id="prediction" class="badge">
+                Select an email
+            </div>
+        </div>
+        <div class="meta">
+            <p><strong>From:</strong> <span id="from"></span></p>
+            <p><strong>Date:</strong> <span id="date"></span></p>
+        </div>
 
+        <hr>
 
-    <label for="body">
-        Email Body
-    </label>
-
-    <textarea
-        id="body"
-        placeholder="Paste email content here..."
-    ></textarea>
-
-
-    <label for="sender_email">
-        Sender Email
-    </label>
-
-    <input
-        id="sender_email"
-        type="email"
-        placeholder="sender@example.com"
-    >
-
-
-    <label for="sender_display_name">
-        Sender Display Name (optional)
-    </label>
-
-    <input
-        id="sender_display_name"
-        type="text"
-        placeholder="John Smith"
-    >
-
-
-    <label for="sent_datetime">
-        Sent Date/Time
-    </label>
-
-    <input
-        id="sent_datetime"
-        type="datetime-local"
-    >
-
-
-    <button onclick="predict()">
-        Check Email
-    </button>
-
-
-    <div id="result"></div>
-
+        <div id="body" class="body"></div>
+    </main>
 </div>
-
-
-<script>
-
-async function predict() {
-
-    const payload = {
-        subject: document.getElementById("subject").value,
-
-        body: document.getElementById("body").value,
-
-        sender_email:
-            document.getElementById("sender_email").value,
-
-        sender_display_name:
-            document.getElementById("sender_display_name").value || null,
-
-        sent_datetime:
-            document.getElementById("sent_datetime").value
-    };
-
-
-    const response = await fetch("/predict", {
-        method: "POST",
-
-        headers: {
-            "Content-Type": "application/json"
-        },
-
-        body: JSON.stringify(payload)
-    });
-
-
-    const data = await response.json();
-
-
-    const result =
-        document.getElementById("result");
-
-
-    result.style.display = "block";
-
-
-    const label =
-        data.prediction === 1
-        ? "Phishing"
-        : "Normal";
-
-
-    result.innerHTML = `
-        <h3>Prediction: ${label}</h3>
-        <p>
-            Confidence:
-            ${(data.confidence * 100).toFixed(2)}%
-        </p>
-    `;
-
-
-    result.className =
-        data.prediction === 1
-        ? "phishing"
-        : "normal";
-}
-
-</script>
-
-
 </body>
 </html>

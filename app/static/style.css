@@ -1,0 +1,90 @@
+body{
+    margin:0;
+    font-family:Segoe UI,sans-serif;
+    background:#edf1f5;
+}
+
+.app{
+    display:grid;
+    grid-template-columns:340px 1fr;
+    height:100vh;
+}
+
+.sidebar{
+    background:white;
+    border-right:1px solid #ddd;
+    display:flex;
+    flex-direction:column;
+}
+
+.sidebar h2{
+    padding:20px;
+    margin:0;
+    border-bottom:1px solid #eee;
+}
+
+.email-list{
+    overflow-y:auto;
+    flex:1;
+}
+
+.email{
+    padding:16px;
+    cursor:pointer;
+    border-bottom:1px solid #eee;
+}
+
+.email:hover{
+    background:#f5f7fb;
+}
+
+.email.active{
+    background:#dbeafe;
+}
+
+.email h3{
+    margin:0;
+    font-size:15px;
+}
+
+.email p{
+    margin:4px 0 0;
+    color:#666;
+    font-size:13px;
+}
+
+.viewer{
+    display:flex;
+    flex-direction:column;
+    padding:30px;
+    overflow:hidden;
+}
+
+.toolbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.body{
+    margin-top:20px;
+    overflow-y:auto;
+    white-space:pre-wrap;
+    flex:1;
+}
+
+.badge{
+    padding:10px 18px;
+    border-radius:20px;
+    font-weight:bold;
+}
+
+.safe{
+    background:#DCFCE7;
+    color:#166534;
+}
+
+.phishing{
+    background:#FEE2E2;
+    color:#991B1B;
+}
