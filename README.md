@@ -10,7 +10,7 @@ as running the BERT preprocessors can **take hours** on the CPU.
 If needed, [embeddings](/embeddings) have been provided if you don't want to spend time on the compute 
 or lack a GPU to run the preprocessors.
 
-This project has an [web application](/app) directory using `FastAPI` to show how the model can be used. 
+This project has a simple [email client](/app) using `FastAPI` to show how the model can be used. 
 To test, run `uvicorn app:app --reload` within the `/app` directory.
 
 ## Running the Project

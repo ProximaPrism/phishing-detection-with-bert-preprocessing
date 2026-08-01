@@ -1,5 +1,5 @@
 [project]
-name = "phishing-detection-bert-model"
+name = "phishing-detection-with-bert-preprocessing"
 version = "0.1.0"
 requires-python = ">=3.12,<3.13"
 dependencies = [
@@ -11,9 +11,10 @@ dependencies = [
     "matplotlib>=3.11.0",
     "numpy>=2.5.0",
     "pandas>=3.0.0",
-    "pandas-stubs~=3.0.5",
     "scikit-learn>=1.9.0",
     "seaborn>=0.13.0",
-    "tensorflow==2.20.0",
+    "tensorflow[and-cuda]==2.20.0",
+    "tensorflow-text>=2.20.1",
     "transformers>=5.14.0",
+    "beautifulsoup4>=4.15.0",
 ]
