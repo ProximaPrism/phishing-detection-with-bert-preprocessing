@@ -1,4 +1,4 @@
-# Phishing Detection DL Classifier Model with BERT Tokenizer
+# BERT Preprocessing + Classifier Model Hybrid for Phishing Detection 
 
 This is a phishing detection deep learning (DL) classifier model using BERT for tokenization and embedding of text within emails. 
 
@@ -10,8 +10,7 @@ as running the BERT preprocessors can **take hours** on the CPU.
 If needed, [embeddings](/embeddings) have been provided if you don't want to spend time on the compute 
 or lack a GPU to run the preprocessors.
 
-This project has a simple [email client](/app) using `FastAPI` to show how the model can be used. 
-To test, run `uvicorn app:app --reload` within the `/app` directory.
+This project has an [IMAP-based web email client](https://github.com/ProximaPrism/phishing-detection-demo) to show how the model can be used. 
 
 ## Running the Project
 

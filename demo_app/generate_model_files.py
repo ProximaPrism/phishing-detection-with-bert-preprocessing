@@ -19,7 +19,7 @@ import joblib
 # =======================
 # EDA
 # =======================
-df = pd.read_csv('data/AVN_Corpus.csv')
+df = pd.read_csv('../data/AVN_Corpus.csv')
 
 df["subject"] = df["subject"].fillna("No Subject")
 df["sender"] = df["sender"].fillna("Unknown Sender")
@@ -217,9 +217,9 @@ embedding = keras.Model(
 #np.save("./embeddings/X_test_embeddings.npy", X_test_embeddings)
 #np.save("./embeddings/X_validate_embeddings.npy", X_validate_embeddings)
 
-X_train_embeddings = np.load("./embeddings/X_train_embeddings.npy")
-X_test_embeddings = np.load("./embeddings/X_test_embeddings.npy")
-X_validate_embeddings = np.load("./embeddings/X_validate_embeddings.npy")
+X_train_embeddings = np.load("../embeddings/X_train_embeddings.npy")
+X_test_embeddings = np.load("../embeddings/X_test_embeddings.npy")
+X_validate_embeddings = np.load("../embeddings/X_validate_embeddings.npy")
 
 print(X_train_embeddings.shape)
 print(X_test_embeddings.shape)

@@ -2,6 +2,7 @@
 name = "phishing-detection-with-bert-preprocessing"
 version = "0.1.0"
 requires-python = ">=3.12,<3.13"
+readme = "README.md"
 dependencies = [
     "fastapi>=0.141.0",
     "ipykernel>=7.3.0",
