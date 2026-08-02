@@ -16,7 +16,7 @@ form.addEventListener("submit", async (event) => {
         host: document.getElementById("host").value,
         username: document.getElementById("username").value,
         password: document.getElementById("password").value,
-        mailbox: document.getElementById("mailbox").value
+        mailbox: "INBOX"
     };
 
     try {
@@ -30,8 +30,10 @@ form.addEventListener("submit", async (event) => {
 
         const result = await response.json();
         if (result.success) {
+            localStorage.setItem("username", result.email);
+
             status.classList.add("success");
-            status.textContent = "Connection successful.";
+            status.textContent = "Login successful, redirecting...";
             window.location.href = "/inbox";
         } else {
             status.classList.add("error");

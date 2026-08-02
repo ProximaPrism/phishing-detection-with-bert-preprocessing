@@ -82,13 +82,14 @@ def login(request: LoginRequest, response: Response):
         )
 
         return {
-            "success": True
+            "success": True,
+            "email": request.username
         }
     except Exception as ex:
         if "Invalid credentials" in str(ex):
             return {
                 "success": False,
-                "message": "Invalid credentials."
+                "message": "Username or password is incorrect. Please try again."
             }
 
         return {

@@ -8,16 +8,16 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background: #edf1f5;
-    font-family: Segoe UI, sans-serif;
+    background: hsl(210, 30%, 95%);
+    font-family: 'Inter', sans-serif;
 }
 
 .card {
-    width: 420px;
-    background: white;
+    width: 40em;
+    background: hsl(0, 0%, 100%);
     padding: 40px;
     border-radius: 14px;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, .12);
+    box-shadow: 0 8px 25px hsla(0, 0%, 0%, .2);
 }
 
 h1 {
@@ -28,7 +28,7 @@ h1 {
 
 .subtitle {
     margin-bottom: 30px;
-    color: #666;
+    color: hsl(210, 0%, 35%);
     text-align: center;
 }
 
@@ -42,14 +42,15 @@ label {
 input {
     width: 100%;
     padding: 12px;
-    border: 1px solid #ccc;
+    border: 1px solid hsl(210, 0%, 70%);
     border-radius: 8px;
     font-size: 15px;
+    font-family: 'Fira Code', monospace;
 }
 
 input:focus {
     outline: none;
-    border-color: #2563eb;
+    border-color: hsl(200, 100%, 45%);
 }
 
 button {
@@ -58,14 +59,15 @@ button {
     padding: 14px;
     border: none;
     border-radius: 8px;
-    background: #2563eb;
-    color: white;
+    background: hsl(200, 100%, 45%);
+    color: hsl(0, 0%, 100%);
     font-size: 15px;
+    font-weight: 600;
     cursor: pointer;
 }
 
 button:hover {
-    background: #1d4ed8;
+    background: hsl(200, 100%, 35%);
 }
 
 button:disabled {
@@ -78,12 +80,13 @@ button:disabled {
     min-height: 22px;
     text-align: center;
     font-weight: 600;
+    font-family: 'Fira Code', sans-serif;
 }
 
 .status.error {
-    color: #b91c1c;
+    color: hsl(0, 100%, 45%);
 }
 
 .status.success {
-    color: #15803d;
+    color: hsl(128, 95%, 35%);
 }
