@@ -60,6 +60,7 @@ The classifier was trained using:
 - Running for 20 epochs
 
 ### Choice of BERT and Multi-layer Neural Network Classifier
+#### BERT
 
 BERT was chosen because understanding meaning and context of the emails is important in 
 detecting whether a given email is phishing or normal. 
@@ -71,6 +72,11 @@ attempt to imitate normal language used in emails.
 Additionally, BERT is able to capture meaning within the emails despite the different words used in them,
 which helps the neural network classifier to generalize phishing emails and normal emails without such emails
 requiring specific words.
+
+In the initialization process, the BERT backbone was frozen (disabled for training). This ensures that BERT
+is only used as a feature extractor, and that the classifier is the only model learning from the dataset.
+
+#### Classifier
 
 The neural network was designed for finding relations between the text embeddings and the 
 email metadata. 
