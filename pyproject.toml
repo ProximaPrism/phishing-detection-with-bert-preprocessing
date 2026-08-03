@@ -17,6 +17,4 @@ dependencies = [
     "tensorflow[and-cuda]==2.20.0",
     "tensorflow-text>=2.20.1",
     "transformers>=5.14.0",
-    "beautifulsoup4>=4.15.0",
-    "starlette>=1.3.1",
 ]
