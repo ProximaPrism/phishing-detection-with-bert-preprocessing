@@ -47,11 +47,11 @@ The classifier model used is a multi-layer neural network with:
 - 0.3 dropout, disabling 30% of neurons at random in the model
 - 128-d layer with `ReLU` activation
 - 0.3 dropout
-- 2-d layer with `softmax` activation, probability output: (normal, phishing)
+- 1-d layer with `sigmoid` activation, returns probability output for phishing
 
 The classifier was compiled with:
 - Adam optimizer
-- Sparse categorical cross-entropy loss (pairs with `softmax`)
+- Binary cross-entropy loss
 - Accuracy for metrics
 
 The classifier was trained using:
