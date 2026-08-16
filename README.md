@@ -44,9 +44,7 @@ This finalized dataset is a 780-dimension vector (768 text + 12 numeric)
 
 The classifier model used is a multi-layer neural network with:
 - 256-d layer with `ReLU` activation
-- 0.3 dropout, disabling 30% of neurons at random in the model
 - 128-d layer with `ReLU` activation
-- 0.3 dropout
 - 1-d layer with `sigmoid` activation, returns probability output for phishing
 
 The classifier was compiled with:
